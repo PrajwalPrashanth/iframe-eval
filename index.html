@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<script>
+  // Avoid arrow function syntax to stay ES5 compatible for the sake of googlebot.
+  console.log("hello ji");
+  window.addEventListener("message", function (message) {
+    console.log("listener", message);
+    if (message.source != window.parent) {
+      console.log("return");
+      return;
+    }
+    if (message.data.sandboxed_iframe_evaluation) {
+      // Message is available in scope so evaluated script can get params from
+      // it.
+      console.log("success", message);
+      window.currentMessage = message;
+      eval.call(null, message.data.sandboxed_iframe_evaluation);
+      delete window.currentMessage;
+    }
+  });
+</script>
