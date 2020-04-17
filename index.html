@@ -7,10 +7,7 @@
       }
       if (message.data.sandboxed_iframe_evaluation) {
         window.currentMessage = message;
-        eval.call(
-          null,
-          decodeURIComponent(message.data.sandboxed_iframe_evaluation)
-        );
+        eval.call(null, message.data.sandboxed_iframe_evaluation);
         delete window.currentMessage;
         message.source.postMessage({ resizeHeight: this.y.clientHeight }, "*");
       }
