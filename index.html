@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<script>
-  window.addEventListener("message", message => {
-    if (message.source != window.parent) {
-      return;
-    }
-    if (message.data.sandboxed_iframe_evaluation) {
-      window.currentMessage = message;
-      eval.call(null, message.data.sandboxed_iframe_evaluation);
-      delete window.currentMessage;
-      message.source.postMessage({ resizeHeight: this.y.clientHeight }, "*");
-    }
-  });
-</script>
+<head>
+  <script>
+    window.addEventListener("message", message => {
+      if (message.source != window.parent) {
+        return;
+      }
+      if (message.data.sandboxed_iframe_evaluation) {
+        window.currentMessage = message;
+        eval.call(null, message.data.sandboxed_iframe_evaluation);
+        delete window.currentMessage;
+        message.source.postMessage({ resizeHeight: this.y.clientHeight }, "*");
+      }
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="index.css" />
+</head>
