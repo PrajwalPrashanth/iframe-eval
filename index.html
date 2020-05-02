@@ -12,6 +12,18 @@
         window.currentMessage = message;
         eval.call(null, message.data.iframeEvaluation);
         delete window.currentMessage;
+        svgs = this.document.getElementsByTagName("svg");
+        for (i = 0; i < svgs.length; i++) {
+          svgs[i].setAttribute("xmlns", "http://www.w3.org/2000/svg");
+          var blob = new Blob([svgs[i]], { type: "image/svg+xml" });
+          var url = URL.createObjectURL(blob);
+          var image = document.createElement("img");
+          image.addEventListener("load", () => URL.revokeObjectURL(url), {
+            once: true
+          });
+          image.src = url;
+          svgs[i].parentNode.replaceChild(image, svgs[i]);
+        }
         // TODO change * to requried domain
         message.source.postMessage(
           { resizeHeight: this.document.body.clientHeight },
