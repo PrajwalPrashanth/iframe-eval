@@ -13,7 +13,11 @@
         eval.call(null, message.data.iframeEvaluation);
         delete window.currentMessage;
         // TODO change * to requried domain
-        message.source.postMessage({ resizeHeight: this.y.clientHeight }, "*");
+        console.log(this.y, this.body);
+        message.source.postMessage(
+          { resizeHeight: this.body.clientHeight },
+          "*"
+        );
       }
     });
   </script>
