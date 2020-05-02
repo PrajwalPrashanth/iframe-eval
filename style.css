@@ -189,11 +189,9 @@
 .rendered_html iframe,
 .rendered_html img {
   max-width: 100% !important;
-  height: auto;
   object-fit: contain;
 }
 .rendered_html svg {
-  height: auto;
   object-fit: contain;
 }
 .rendered_html img.unconfined,
